@@ -11,3 +11,4 @@ djangorestframework-simplejwt
 gunicorn
 dj-database-url
 pandas
+psycopg2-binary
