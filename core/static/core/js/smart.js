@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const smartAddToken = urlParams.get('smart-add-token');
     const xPaths = []
     const unprocessedXPaths = []
+    const unprocessedSelectors = []
     const xPathComponentMapping = {}
 
     function isHTML(str) {
@@ -48,11 +49,37 @@ document.addEventListener('DOMContentLoaded', () => {
         return segs.length ? '/' + segs.join('/') : null;
     };
 
+    function createSelectorFromElement(element){
+        var names = [];
+        while (element.parentNode){
+          if (element.id){
+            names.unshift('#'+element.id);
+            break;
+          }else{
+            if (element==element.ownerDocument.documentElement) names.unshift(element.tagName);
+            else{
+              for (var c=1,e=element;e.previousElementSibling;e=e.previousElementSibling,c++);
+              names.unshift(el.tagName+":nth-child("+c+")");
+            }
+            element=element.parentNode;
+          }
+        }
+        return names.join(" > ");
+      }
+
     function getElementByXpath(path, element=null) {
         if (element !== null) {
             return document.evaluate(path, element, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         }
         return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    }
+
+    function getElementBySelector(selector, element=null) {
+        if (element !== null) {
+            return element.querySelector(selector)
+        }
+
+        return document.querySelector(selector)
     }
 
     function getElementCssText(element) {
@@ -135,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             const leverageParent = parentIsButtonOrLink(element);
 
                             const xpath = createXPathFromElement(element);
+                            const selector = createSelectorFromElement(element);
                             let query_string = window.location.search.replace(`smart-add-token=${smartAddToken}`, '')
 
                             if (query_string === '?') {
@@ -153,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 body: JSON.stringify({
                                     name: element.textContent,
                                     xpath: xpath,
+                                    selector: selector,
                                     element_type: leverageParent ? element.parentElement.tagName : element.tagName,
                                     element_class: element.className,
                                     element_id: element.id,
@@ -317,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const buildComponents = new Promise((resolve, reject) => {
                     xpathComponents.forEach((xpathComponent, index, array) => {
-                        const component = getElementByXpath(xpathComponent.xpath);
+                        let component = getElementByXpath(xpathComponent.xpath);
                         xPaths.push(xpathComponent.xpath);
 
                         xPathComponentMapping[xpathComponent.xpath] = xpathComponent;
@@ -330,7 +359,18 @@ document.addEventListener('DOMContentLoaded', () => {
                                 component: xpathComponent,
                             });
                         } else {
-                            unprocessedXPaths.push(xpathComponent.xpath);
+                            component = getElementBySelector(xpathComponent.selector);
+                            if (component !== null) {
+                                xPaths.push(xpathComponent.xpath);
+                                xpathComponentList.push({
+                                    element: component,
+                                    xpath: xpathComponent.xpath,
+                                    component: xpathComponent,
+                                });
+                            } else {
+                                unprocessedXPaths.push(xpathComponent.xpath);
+                                unprocessedSelectors.push(xpathComponent.selector);
+                            }
                         }
                         if (index === array.length - 1) resolve();
                     });
@@ -358,6 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mutations_list.forEach(mutation => {
                     mutation.addedNodes.forEach(addedNode => {
                         let xpath = createXPathFromElement(addedNode);
+                        let selector = createSelectorFromElement(addedNode);
 
                         if (xpath && unprocessedXPaths.includes(xpath)) {
                             unprocessedXPaths.splice(unprocessedXPaths.indexOf(xpath), 1);
@@ -366,7 +407,15 @@ document.addEventListener('DOMContentLoaded', () => {
                                 xpath: xpath,
                                 component: xPathComponentMapping[xpath],
                             }]);
-                        } else {
+                        } else if (selector && unprocessedSelectors.includes(selector)) {
+                            unprocessedSelectors.splice(unprocessedSelectors.indexOf(selector), 1);
+                            processSmartElements([{
+                                element: addedNode,
+                                xpath: xpath,
+                                component: xPathComponentMapping[xpath],
+                            }]);
+                        }
+                        else {
                             unprocessedXPaths.forEach(xpathString => {
                                 let element = getElementByXpath(xpathString, addedNode);
 

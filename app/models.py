@@ -64,6 +64,7 @@ class Component(models.Model):
     url_query_string = models.CharField(max_length=255, default="")
     css_text = models.TextField(default="", blank=True)
     css_json = models.JSONField(null=True, blank=True)
+    selector = models.TextField(default="", blank=True)
 
     class Meta:
         ordering = ['website__name', 'type__name', 'name']

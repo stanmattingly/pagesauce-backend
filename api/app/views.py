@@ -232,6 +232,7 @@ class ComponentViewset(ModelViewSet):
             component_type, _ = ComponentType.objects.get_or_create(owner=user, name="Click to Add")
             name = request.data.get('name')
             xpath = request.data.get('xpath')
+            selector = request.data.get('selector', '')
             element_class = request.data.get('element_class', '')
             element_id = request.data.get('element_id', '')
             element_type = request.data.get('element_type', '')
@@ -245,6 +246,7 @@ class ComponentViewset(ModelViewSet):
                 website=website, 
                 type=component_type, 
                 xpath=xpath,
+                selector=selector,
             )
 
             component.name = name
