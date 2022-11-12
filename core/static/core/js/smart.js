@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (element==element.ownerDocument.documentElement) names.unshift(element.tagName);
             else{
               for (var c=1,e=element;e.previousElementSibling;e=e.previousElementSibling,c++);
-              names.unshift(el.tagName+":nth-child("+c+")");
+              names.unshift(element.tagName+":nth-child("+c+")");
             }
             element=element.parentNode;
           }
