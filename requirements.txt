@@ -7,7 +7,9 @@
 arrow==1.2.3
     # via django-q
 asgiref==3.5.2
-    #via django
+    # via django
+backports-zoneinfo==0.2.1
+    # via django
 blessed==1.19.1
     # via django-q
 certifi==2022.9.24
@@ -108,6 +110,8 @@ urllib3==1.26.12
     # via requests
 wcwidth==0.2.5
     # via blessed
+whitenoise==6.2.0
+    # via -r requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
