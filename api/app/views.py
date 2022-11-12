@@ -147,6 +147,17 @@ class ContentClusterViewset(ModelViewSet):
 
         return Response(ContentClusterSerializer(cluster).data)
 
+    @action(detail=True, methods=['post'])
+    def add_contents(self, request, universal_id=None):
+        cluster = self.get_object()
+        contents = Content.objects.filter(universal_id__in=request.data.get('contents', []))
+
+        if contents:
+            cluster.contents.add(*contents)
+
+        return Response(ContentClusterSerializer(cluster).data)
+
+
 class ComponentViewset(ModelViewSet):
     serializer_class = ComponentSerializer
     queryset = Component.objects.all()

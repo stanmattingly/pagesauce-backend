@@ -322,8 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function addClusterContents(clusterId, contents, userId) {
-                fetch(`https://api.pagesauce.io/api/app/content-clusters/${clusterId}/`, {
-                    method: 'patch',
+                fetch(`https://api.pagesauce.io/api/app/content-clusters/${clusterId}/add_contents/`, {
+                    method: 'post',
                     headers: {
                         'Authorization': `Token ${apiKey}`,
                         'Accept': 'application/json',
