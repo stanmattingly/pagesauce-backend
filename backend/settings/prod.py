@@ -6,6 +6,14 @@ SECRET_KEY = 'django-insecure-b&eeuk(!h!*gn0ae*r#i-+jc6$sdm-24wsipk%8-(n2#-x=#^+
 
 ALLOWED_HOSTS = ['*']
 
+CORS_ALLOWED_ORIGINS = [
+    'pagesauce.io',
+    'www.pagesauce.io',
+    'https://pagesauce.io',
+    'https://www.pagesauce.io',
+    'http://localhost:8000',
+]
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
