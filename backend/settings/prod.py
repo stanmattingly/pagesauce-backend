@@ -8,10 +8,9 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     'http://pagesauce.io',
-    'www.pagesauce.io',
+    'http://www.pagesauce.io',
     'https://pagesauce.io',
     'https://www.pagesauce.io',
-    'http://localhost:8000',
 ]
 
 # SECURITY WARNING: don't run with debug turned on in production!
