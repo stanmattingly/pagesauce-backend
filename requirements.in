@@ -1,0 +1,13 @@
+Django==4.1.2
+django-q
+django-cors-headers
+djangorestframework
+dj-stripe
+numpy
+uritemplate
+pyyaml
+django-rest-swagger
+djangorestframework-simplejwt
+gunicorn
+dj-database-url
+pandas

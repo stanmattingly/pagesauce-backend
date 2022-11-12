@@ -1,0 +1,1162 @@
+openapi: 3.0.2
+info:
+  title: 'SmartPrice.io'
+  description: 'Generate smart prices for your SaaS business.'
+  version: '0.1'
+paths:
+  /api/price-groups/:
+    get:
+      operationId: listPriceGroups
+      description: Get, List and Create Price Groups
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PriceGroup'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createPriceGroup
+      description: Get, List and Create Price Groups
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriceGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PriceGroup'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PriceGroup'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceGroup'
+          description: ''
+      tags:
+      - api
+  /api/price-groups/{id}/:
+    get:
+      operationId: retrievePriceGroup
+      description: Get, List and Create Price Groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this price group.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceGroup'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updatePriceGroup
+      description: Get, List and Create Price Groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this price group.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriceGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PriceGroup'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PriceGroup'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceGroup'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdatePriceGroup
+      description: Get, List and Create Price Groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this price group.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriceGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PriceGroup'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PriceGroup'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceGroup'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyPriceGroup
+      description: Get, List and Create Price Groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this price group.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/prices/:
+    get:
+      operationId: listPrices
+      description: A simple ViewSet for listing or retrieving PriceGroup objects.
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Price'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createPrice
+      description: A simple ViewSet for listing or retrieving PriceGroup objects.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Price'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Price'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Price'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+          description: ''
+      tags:
+      - api
+  /api/prices/get_group_price/:
+    get:
+      operationId: getGroupPricePrice
+      description: A simple ViewSet for listing or retrieving PriceGroup objects.
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+          description: ''
+      tags:
+      - api
+  /api/prices/{id}/:
+    get:
+      operationId: retrievePrice
+      description: A simple ViewSet for listing or retrieving PriceGroup objects.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this price.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updatePrice
+      description: A simple ViewSet for listing or retrieving PriceGroup objects.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this price.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Price'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Price'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Price'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdatePrice
+      description: A simple ViewSet for listing or retrieving PriceGroup objects.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this price.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Price'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Price'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Price'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyPrice
+      description: A simple ViewSet for listing or retrieving PriceGroup objects.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this price.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/features/:
+    get:
+      operationId: listGroupFeatures
+      description: Get, List and Create Price Group Features
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupFeature'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createGroupFeature
+      description: Get, List and Create Price Group Features
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupFeature'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GroupFeature'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GroupFeature'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupFeature'
+          description: ''
+      tags:
+      - api
+  /api/features/get_group_features/:
+    get:
+      operationId: getGroupFeaturesGroupFeature
+      description: Get, List and Create Price Group Features
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupFeature'
+          description: ''
+      tags:
+      - api
+  /api/features/{id}/:
+    get:
+      operationId: retrieveGroupFeature
+      description: Get, List and Create Price Group Features
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this group feature.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupFeature'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateGroupFeature
+      description: Get, List and Create Price Group Features
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this group feature.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupFeature'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GroupFeature'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GroupFeature'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupFeature'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateGroupFeature
+      description: Get, List and Create Price Group Features
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this group feature.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupFeature'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GroupFeature'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GroupFeature'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupFeature'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyGroupFeature
+      description: Get, List and Create Price Group Features
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this group feature.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/analytic-records/:
+    get:
+      operationId: listAnalyticRecords
+      description: Get, List and Create Analytics Records
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnalyticRecord'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createAnalyticRecord
+      description: Get, List and Create Analytics Records
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyticRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnalyticRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnalyticRecord'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticRecord'
+          description: ''
+      tags:
+      - api
+  /api/analytic-records/{id}/:
+    get:
+      operationId: retrieveAnalyticRecord
+      description: Get, List and Create Analytics Records
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this analytic record.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticRecord'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateAnalyticRecord
+      description: Get, List and Create Analytics Records
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this analytic record.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyticRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnalyticRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnalyticRecord'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticRecord'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateAnalyticRecord
+      description: Get, List and Create Analytics Records
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this analytic record.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyticRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnalyticRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnalyticRecord'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticRecord'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyAnalyticRecord
+      description: Get, List and Create Analytics Records
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this analytic record.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/price-group-descriptions/:
+    get:
+      operationId: listPriceGroupDescriptions
+      description: Get, List and Create Price Group Descriptions
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PriceGroupDesciption'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createPriceGroupDescription
+      description: Get, List and Create Price Group Descriptions
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriceGroupDesciption'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PriceGroupDesciption'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PriceGroupDesciption'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceGroupDesciption'
+          description: ''
+      tags:
+      - api
+  /api/price-group-descriptions/get_group_description/:
+    get:
+      operationId: getGroupDescriptionPriceGroupDescription
+      description: Get, List and Create Price Group Descriptions
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceGroupDesciption'
+          description: ''
+      tags:
+      - api
+  /api/price-group-descriptions/{id}/:
+    get:
+      operationId: retrievePriceGroupDescription
+      description: Get, List and Create Price Group Descriptions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this price group description.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceGroupDesciption'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updatePriceGroupDescription
+      description: Get, List and Create Price Group Descriptions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this price group description.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriceGroupDesciption'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PriceGroupDesciption'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PriceGroupDesciption'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceGroupDesciption'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdatePriceGroupDescription
+      description: Get, List and Create Price Group Descriptions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this price group description.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriceGroupDesciption'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PriceGroupDesciption'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PriceGroupDesciption'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceGroupDesciption'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyPriceGroupDescription
+      description: Get, List and Create Price Group Descriptions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this price group description.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/analytics-users/:
+    get:
+      operationId: listAnalyticsUsers
+      description: Get, List and Analytics Users
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnalyticsUser'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createAnalyticsUser
+      description: Get, List and Analytics Users
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyticsUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnalyticsUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnalyticsUser'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsUser'
+          description: ''
+      tags:
+      - api
+  /api/analytics-users/{analytics_user_id}/:
+    get:
+      operationId: retrieveAnalyticsUser
+      description: Get, List and Analytics Users
+      parameters:
+      - name: analytics_user_id
+        in: path
+        required: true
+        description: A UUID string identifying this analytics user.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsUser'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateAnalyticsUser
+      description: Get, List and Analytics Users
+      parameters:
+      - name: analytics_user_id
+        in: path
+        required: true
+        description: A UUID string identifying this analytics user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyticsUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnalyticsUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnalyticsUser'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsUser'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateAnalyticsUser
+      description: Get, List and Analytics Users
+      parameters:
+      - name: analytics_user_id
+        in: path
+        required: true
+        description: A UUID string identifying this analytics user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyticsUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnalyticsUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnalyticsUser'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsUser'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyAnalyticsUser
+      description: Get, List and Analytics Users
+      parameters:
+      - name: analytics_user_id
+        in: path
+        required: true
+        description: A UUID string identifying this analytics user.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+components:
+  schemas:
+    PriceGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+        slots:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              order:
+                type: integer
+                nullable: true
+              group:
+                type: integer
+            required:
+            - id
+            - group
+        name:
+          type: string
+          maxLength: 100
+        uuid:
+          type: string
+          format: uuid
+          readOnly: true
+        term:
+          enum:
+          - m
+          - y
+          type: string
+        hotness:
+          type: number
+        ups:
+          type: integer
+        downs:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - slots
+      - name
+    Price:
+      type: object
+      properties:
+        id:
+          type: integer
+        group:
+          type: object
+          properties:
+            id:
+              type: integer
+            slots:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  order:
+                    type: integer
+                    nullable: true
+                  group:
+                    type: integer
+                required:
+                - id
+                - group
+            name:
+              type: string
+              maxLength: 100
+            uuid:
+              type: string
+              format: uuid
+              readOnly: true
+            term:
+              enum:
+              - m
+              - y
+              type: string
+            hotness:
+              type: number
+            ups:
+              type: integer
+            downs:
+              type: integer
+            created_at:
+              type: string
+              format: date-time
+          required:
+          - id
+          - slots
+          - name
+        stripe_id:
+          type: string
+          maxLength: 200
+        price:
+          type: number
+        hotness:
+          type: number
+        ups:
+          type: integer
+        downs:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        users:
+          type: array
+          items:
+            type: string
+      required:
+      - id
+      - group
+      - stripe_id
+      - price
+    GroupFeature:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        slot:
+          type: object
+          properties:
+            id:
+              type: integer
+            order:
+              type: integer
+              nullable: true
+            group:
+              type: integer
+          required:
+          - id
+          - group
+        description:
+          type: string
+        hotness:
+          type: number
+        ups:
+          type: integer
+        downs:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        users:
+          type: array
+          items:
+            type: string
+      required:
+      - slot
+      - description
+    AnalyticRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        price:
+          type: object
+          properties:
+            id:
+              type: integer
+            group:
+              type: object
+              properties:
+                id:
+                  type: integer
+                slots:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      order:
+                        type: integer
+                        nullable: true
+                      group:
+                        type: integer
+                    required:
+                    - id
+                    - group
+                name:
+                  type: string
+                  maxLength: 100
+                uuid:
+                  type: string
+                  format: uuid
+                  readOnly: true
+                term:
+                  enum:
+                  - m
+                  - y
+                  type: string
+                hotness:
+                  type: number
+                ups:
+                  type: integer
+                downs:
+                  type: integer
+                created_at:
+                  type: string
+                  format: date-time
+              required:
+              - id
+              - slots
+              - name
+            stripe_id:
+              type: string
+              maxLength: 200
+            price:
+              type: number
+            hotness:
+              type: number
+            ups:
+              type: integer
+            downs:
+              type: integer
+            created_at:
+              type: string
+              format: date-time
+            users:
+              type: array
+              items:
+                type: string
+          required:
+          - id
+          - group
+          - stripe_id
+          - price
+        action:
+          enum:
+          - '-'
+          - view
+          - hover
+          - leave
+          - select
+          - unselect
+          - signup_hover
+          - signup_leave
+          - signup_click
+          - purchase_hover
+          - purchase_leave
+          - purchase_click
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        user:
+          type: string
+        group:
+          type: integer
+        group_description:
+          type: integer
+          nullable: true
+        features:
+          type: array
+          items:
+            type: integer
+      required:
+      - price
+      - user
+      - group
+      - features
+    PriceGroupDesciption:
+      type: object
+      properties:
+        id:
+          type: integer
+        description:
+          type: string
+        hotness:
+          type: number
+        ups:
+          type: integer
+        downs:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        group:
+          type: integer
+        users:
+          type: array
+          items:
+            type: string
+      required:
+      - id
+      - description
+    AnalyticsUser:
+      type: object
+      properties:
+        analytics_user_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
