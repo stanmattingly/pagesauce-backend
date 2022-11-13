@@ -12,7 +12,7 @@ from core.models import HeatableModel, Token
 class Website(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="websites")
     token = models.OneToOneField(Token, on_delete=models.CASCADE, related_name="website", null=True, blank=True)
-    dynamic_add_tokens = models.ManyToManyField(Token, related_name="dynamic_website_access")
+    dynamic_add_tokens = models.ManyToManyField(Token, related_name="dynamic_website_access", blank=True)
     name = models.CharField(max_length=50, default="", blank=True)
     universal_id = models.UUIDField(default=uuid.uuid4, editable=False)
     url = models.URLField()
