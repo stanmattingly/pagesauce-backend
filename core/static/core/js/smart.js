@@ -417,19 +417,19 @@ document.addEventListener('DOMContentLoaded', () => {
                             }]);
                         }
                         else {
-                            unprocessed.forEach(element => {
-                                let element = getElementByXpath(element.xpath, addedNode);
+                            unprocessed.forEach(valuePair => {
+                                let element = getElementByXpath(valuePair.xpath, addedNode);
 
                                 if (!element) {
-                                    element = getElementBySelector(element.selector, addedNode);
+                                    element = getElementBySelector(valuePair.selector, addedNode);
                                 }
 
                                 if (element) {
-                                    unprocessed.splice(unprocessed.findIndex(element => element.selector === selector), 1);
+                                    unprocessed.splice(unprocessed.findIndex(unprocessedElement => unprocessedElement.selector === selector), 1);
                                     processSmartElements([{
                                         element: element,
                                         xpath: xpathString,
-                                        component: xPathComponentMapping[element.xpath],
+                                        component: xPathComponentMapping[valuePair.xpath],
                                     }])
                                 }
                             })
