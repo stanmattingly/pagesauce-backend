@@ -101,10 +101,9 @@ class Component(models.Model):
         return self.campaigns.filter(end_date=None).exists()
 
     def get_smart_content(self, cluster=None):
-        if False:
-            content = cluster.contents.filter(component=self).first()
-            if content:
-                return content
+        content = cluster.contents.filter(component=self).first()
+        if content:
+            return content
 
         contents = self.contents.all().order_by('-hotness')
 
