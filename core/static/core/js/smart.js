@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     processSmartElements([{
                                         element: element,
                                         xpath: xpathString,
-                                        component: xPathComponentMapping[xpathString],
+                                        component: xPathComponentMapping[element.xpath],
                                     }])
                                 }
                             })
