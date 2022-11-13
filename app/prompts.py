@@ -1,5 +1,5 @@
 COMPONENT_SUGGESTION = """
-I have a {} element on my website that has the text {}.
+I have a {} element on my website that says, "{}".
 
-Give me five unique and creative substitutes for this content that will convert users better.
+Create 5 creative and attention-grabbing variations that will get our users attention and drive conversions.
 """

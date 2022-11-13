@@ -1,13 +1,18 @@
-from django.db import models
-from django.db.models import Sum, Q
+import openai
 import uuid
 from numpy.random import choice
+
+from django.db import models
+from django.db.models import Sum, Q
 from django.contrib.auth.models import User
 from django.db.models.constraints import UniqueConstraint
-from django.utils import timezone
+from django.conf import settings
 from .choices import FrontendEvents, ElementTypes
 from .utils import default_uuid_string
+from .prompts import COMPONENT_SUGGESTION
 from core.models import HeatableModel, Token
+
+openai.api_key = settings.OPENAI_KEY
 
 class Website(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="websites")
@@ -64,7 +69,7 @@ class Component(models.Model):
     type = models.ForeignKey(ComponentType, on_delete=models.CASCADE, related_name="components")
     website = models.ForeignKey(Website, on_delete=models.CASCADE, related_name="components")
     url_path = models.CharField(max_length=255, default="")
-    url_query_string = models.CharField(max_length=255, default="")
+    url_query_string = models.CharField(max_length=255, default="", blank=True)
     css_text = models.TextField(default="", blank=True)
     css_json = models.JSONField(null=True, blank=True)
     selector = models.TextField(default="", blank=True)
@@ -80,20 +85,27 @@ class Component(models.Model):
     def __str__(self):
         return f"{self.website.name} | {self.type.name} | {self.name}"
 
+    def generate_suggestion_content(self):
+        response = openai.Completion.create(
+            model="text-davinci-002",
+            prompt=COMPONENT_SUGGESTION.format(self.element_type, self.contents.first().text),
+            temperature=0.85,
+            max_tokens=256,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
+        )
+
+        result = response["choices"][0]["text"]
+        suggestions = result.splitlines()
+
+        for suggestion in suggestions:
+            Content.objects.create(component=self, text=suggestion[3:len(suggestion)], is_suggestion=True)
+
+
     def save(self, *args, **kwargs):
-        result = {}
-        if self.css_text:
-            property_list = self.css_text.split(';')
-            for property in property_list:
-                ruleset = property.split(':')
-
-                try:
-                    if ruleset[1]:
-                        result[ruleset[0]] = ruleset[1] + " !important"
-                except:
-                    pass
-
-        self.css_json = result
+        if self._state.adding is True:
+            self.generate_suggestion_content()
 
         super().save(*args, **kwargs)
 

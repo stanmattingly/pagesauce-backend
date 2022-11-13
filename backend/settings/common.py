@@ -169,3 +169,5 @@ REST_FRAMEWORK = {
 }
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+OPENAI_KEY = os.environ.get("OPENAI_KEY", "")
