@@ -137,6 +137,7 @@ class Content(HeatableModel):
     universal_id = models.UUIDField(default=uuid.uuid4, editable=False)
     text = models.TextField()
     component = models.ForeignKey(Component, on_delete=models.CASCADE, related_name="contents")
+    is_suggestion = models.BooleanField(default=False)
 
     positive_heat_map = {
         FrontendEvents.CLICK: 1,
