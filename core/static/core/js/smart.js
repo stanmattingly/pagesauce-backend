@@ -3,8 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const smartAddToken = urlParams.get('smart-add-token');
     const xPaths = []
-    const unprocessedXPaths = []
-    const unprocessedSelectors = []
+    const unprocessed = []
     const xPathComponentMapping = {}
 
     function isHTML(str) {
@@ -286,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         sessionStorage.setItem('smart-cluster-id', cluster.universal_id);
                         xpathComponents.forEach(xpathComponent => {
                             const element = xpathComponent.element;
-                            fetch(`https://api.pagesauce.io/api/app/components/get_smart_content/?id=${encodeURIComponent(xpathComponent.xpath)}&smart_user_id=${localStorage.getItem('smart-user-id')}&cluster_uuid=${sessionStorage.getItem('smart-cluster-id')}`, {
+                            fetch(`https://api.pagesauce.io/api/app/components/get_smart_content/?id=${xpathComponent.xpath}&smart_user_id=${localStorage.getItem('smart-user-id')}&cluster_uuid=${sessionStorage.getItem('smart-cluster-id')}`, {
                                 method: 'get',
                                 headers: {
                                     'Authorization': `Token ${apiKey}`
@@ -368,8 +367,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                     component: xpathComponent,
                                 });
                             } else {
-                                unprocessedXPaths.push(xpathComponent.xpath);
-                                unprocessedSelectors.push(xpathComponent.selector);
+                                unprocessed.push({
+                                    xpath: xpathComponent.xpath,
+                                    selector: xpathComponent.selector
+                                })
                             }
                         }
                         if (index === array.length - 1) resolve();
@@ -400,15 +401,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         let xpath = createXPathFromElement(addedNode);
                         let selector = createSelectorFromElement(addedNode);
 
-                        if (xpath && unprocessedXPaths.includes(xpath)) {
-                            unprocessedXPaths.splice(unprocessedXPaths.indexOf(xpath), 1);
+                        if (xpath && unprocessed.filter(element => element.xpath === xpath).length > 0) {
+                            unprocessed.splice(unprocessed.findIndex(element => element.xpath === xpath), 1);
                             processSmartElements([{
                                 element: addedNode,
                                 xpath: xpath,
                                 component: xPathComponentMapping[xpath],
                             }]);
-                        } else if (selector && unprocessedSelectors.includes(selector)) {
-                            unprocessedSelectors.splice(unprocessedSelectors.indexOf(selector), 1);
+                        } else if (selector && unprocessed.filter(element => element.selector === selector).length > 0) {
+                            unprocessed.splice(unprocessed.findIndex(element => element.selector === selector), 1);
                             processSmartElements([{
                                 element: addedNode,
                                 xpath: xpath,
@@ -416,11 +417,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             }]);
                         }
                         else {
-                            unprocessedXPaths.forEach(xpathString => {
-                                let element = getElementByXpath(xpathString, addedNode);
+                            unprocessed.forEach(element => {
+                                let element = getElementByXpath(element.xpath, addedNode);
+
+                                if (!element) {
+                                    element = getElementBySelector(element.selector, addedNode);
+                                }
 
                                 if (element) {
-                                    unprocessedXPaths.splice(unprocessedXPaths.indexOf(xpathString), 1);
+                                    unprocessed.splice(unprocessed.findIndex(element => element.selector === selector), 1);
                                     processSmartElements([{
                                         element: element,
                                         xpath: xpathString,
