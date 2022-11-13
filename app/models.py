@@ -102,13 +102,6 @@ class Component(models.Model):
         for suggestion in suggestions:
             Content.objects.create(component=self, text=suggestion[3:len(suggestion)], is_suggestion=True)
 
-
-    def save(self, *args, **kwargs):
-        if self._state.adding is True:
-            self.generate_suggestion_content()
-
-        super().save(*args, **kwargs)
-
     def get_is_live(self):
         return self.campaigns.filter(end_date=None).exists()
 

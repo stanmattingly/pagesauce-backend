@@ -274,6 +274,8 @@ class ComponentViewset(ModelViewSet):
 
             Content.objects.get_or_create(text=initial_content, component=component)
 
+            component.generate_suggestion_content()
+
             return Response(ComponentSerializer(component).data)
         else:
             component_type = ComponentType.objects.get(universal_id=request.data.get('type_uuid'))
