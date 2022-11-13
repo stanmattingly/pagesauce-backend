@@ -8,8 +8,6 @@ arrow==1.2.3
     # via django-q
 asgiref==3.5.2
     # via django
-backports-zoneinfo==0.2.1
-    # via django
 blessed==1.19.1
     # via django-q
 certifi==2022.9.24
