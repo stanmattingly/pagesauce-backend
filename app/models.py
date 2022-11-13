@@ -30,6 +30,9 @@ class Website(models.Model):
         if self.url.endswith('/'):
             self.url = self.url.rstrip(self.url[-1])
 
+        if "http" not in self.url:
+            self.url = "https://" + self.url
+
         if not self.token:
             self.token = Token.objects.create(
                 user=self.owner
