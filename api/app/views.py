@@ -274,7 +274,7 @@ class ComponentViewset(ModelViewSet):
 
             Content.objects.get_or_create(text=initial_content, component=component)
 
-            component.generate_suggestion_content()
+            # component.generate_suggestion_content()
 
             return Response(ComponentSerializer(component).data)
         else:
