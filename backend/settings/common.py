@@ -127,10 +127,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "")
-STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "sk_test_51M26FaJz8u2CbaXNMXN0i9syWN5UybMOx0me0oKK296vD905aDaQF7r93vBYfoQ0dbpjoi0t5fIfH8KAlJQO2g4y00GFtoSPSK")
+STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "")
 STRIPE_LIVE_MODE = False  # Change to True in production
-DJSTRIPE_WEBHOOK_SECRET = "whsec_1f16cf345b0f8a221204818b34424867387afb43ca1948da3dd1e4c88dcd4942"  # Get it from the section in the Stripe dashboard where you added the webhook endpoint
-STRIPE_WEBHOOK_SECRET = "whsec_1991ee298a1c21ede65bf2914b61496b68eacbc8c4233a51126872d6270ffad3"
+DJSTRIPE_WEBHOOK_SECRET = ""  # Get it from the section in the Stripe dashboard where you added the webhook endpoint
+STRIPE_WEBHOOK_SECRET = ""
 DJSTRIPE_USE_NATIVE_JSONFIELD = True  # We recommend setting to True for new installations
 DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 
